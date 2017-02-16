@@ -1,43 +1,35 @@
 export default class StringStats {
   constructor(str) {
     this.str = str;
-    this.freqs = this._getStringFrequencies(this.str);
-//    this.probabilities = this._calculateProbabilities();
+    this.length = str.length;
+    this._stats = this._calculateFrequencies(this.str);
+    this._calculateProbabilities(this._stats, this.length);
   };
 
-  _getStringFrequencies(str) {
+  get stats() {
+    return this._stats;
+  }
+
+  _calculateFrequencies(str) {
     let freqs = {};
 
     for (let ch of str) {
-      freqs[ch] ? freqs[ch]++ : freqs[ch] = 1;
+      if (freqs[ch] !== undefined) {
+        freqs[ch].counter++;
+      } else {
+        freqs[ch] = {};
+        freqs[ch].counter = 1;
+      }
     }
+
     return freqs;
   };
 
-/**
- * Translate an array containing the frequencies
- * of the symbols in the alphabet to a new array
- * with the probabilities of each one
- *
- * @param {Array.<Object>} Array of {s: <string>, p: <counter> }
- * @return {Array.<Object>} Array of { s: <string>, p: <probability> }
- * @private
- */
-  _calculateProbabilities(frequencies) {
-    let total = 0;
-    let alphabet = {};
-
-    frequencies.map((item) => total += item.f);
-
-    alphabet = frequencies.map(function (item) {
-      let n = {};
-
-      n.s = item.s;
-      n.p = (item.f) / total;
-      return n;
+  _calculateProbabilities(frequencies, total) {
+    Object.keys(frequencies).forEach(function (key) {
+      frequencies[key].probability = frequencies[key].counter / total;
     });
 
-    return alphabet;
   };
 
 }
