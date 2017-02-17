@@ -1,5 +1,5 @@
 {
-  "name": "string-stats",
+  "name": "stringstats",
   "version": "0.1.0",
   "description": "String statistics",
   "main": "lib/stringstats.min.js",
