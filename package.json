@@ -1,6 +1,6 @@
 {
   "name": "stringstats",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "String statistics",
   "main": "lib/stringstats.min.js",
   "scripts": {
